@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>역사의 끝 (유리지에) · 각인된 악몽 패턴 연습 시뮬레이터</title>
+  <link rel="stylesheet" href="css/style.css?v=3.9.1">
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="sub">각인된 악몽 2페이즈 · 죽음을 딛고 선 자 (유리지에) 핵심 패턴 연습</p>
+        <h1>역사의 끝 (역사 칼날 패턴) — 인게임 패턴 연습</h1>
+      </div>
+      <div class="header-badges">
+        <span class="badge warn">와이드 맵 카메라 스크롤 · 36검 포위 &amp; 16검 수레바퀴</span>
+        <span class="badge">총 9구간 (63.5초 풀버전)</span>
+      </div>
+    </header>
+
+    <section class="layout">
+      <div class="stage">
+        <div class="boss-hud">
+          <img class="boss-portrait" src="assets/icon_2740.png" alt="유리지에">
+          <div class="boss-bars">
+            <div class="boss-title-row">
+              <span class="boss-name">Lv145 보스-죽음을 딛고 선 자 — <span id="stageLabel">1 / 9 구간</span></span>
+              <div class="status-pills">
+                <span id="erosionPill" class="erosion-pill hidden">죽음의 세계 · 보라 체력바</span>
+                <span id="worldPill" class="world-pill">생명의 세계 (적색 HP)</span>
+              </div>
+            </div>
+            <div class="progress-track">
+              <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <div class="influence-row" title="해방된 라르고 vs 유리지에 영향력 게이지">
+              <span class="inf-label largo">해방된 라르고</span>
+              <div class="influence-track">
+                <div id="influenceFill" class="influence-fill" style="width: 52%;"></div>
+                <div class="influence-mid"></div>
+              </div>
+              <span class="inf-label yurisie">유리지에</span>
+            </div>
+          </div>
+          <div class="hud-stats">
+            <span>피격 <strong id="hitCount">0 / 1</strong></span>
+            <span>배속 <strong id="speedLabel">1.0x</strong></span>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="gameCanvas" width="1158" height="720"></canvas>
+          <div id="overlay" class="overlay">
+            <div id="overlayQuote" class="quote">"이제, 또렷이 보이는가. 네 역사의 끝을 목도하라"</div>
+            <h2 id="overlayTitle">역사의 끝 (63.5초 · 9구간 패턴 시뮬레이터)</h2>
+            <p id="overlayDesc">
+              와이드 아레나 좌우 카메라 스크롤, 36검 포위망 및 회전 칼날 수레바퀴(3시→12시), 수직 보라 번개 기둥, 검은 코어 사슬 절단 5회, 피안화(생명/죽음의 꽃) 세계 전환, 54.0초 흑백(Monochrome) 카운터 및 해방된 라르고 합동 격돌을 연습할 수 있습니다.
+            </p>
+            <div id="overlayStats" class="overlay-stats hidden"></div>
+            <button id="startBtn" class="btn-primary">연습 시작 (Enter / 클릭)</button>
+          </div>
+        </div>
+
+        <div class="timeline-bar">
+          <div class="timeline-meta">
+            <span id="timeText">구간 0.00s / 11.85s (전체 0.0s / 63.5s)</span>
+            <span>타임라인 클릭 시 즉시 이동 · 빨강: 장판/검선 · 보라: 수직 기둥 · 초록: 사슬 절단 · 파랑: 꽃 · 금색: 흑백 카운터</span>
+          </div>
+          <div id="timelineTrack" class="timeline-track" title="클릭하여 구간 내 해당 시점으로 이동">
+            <div id="timelineCursor" class="timeline-cursor"></div>
+          </div>
+        </div>
+
+        <div class="controls-bar">
+          <div class="btn-group">
+            <button id="btnPrev" class="ctrl">◀ 이전 [</button>
+            <button id="btnPause" class="ctrl">일시정지 P</button>
+            <button id="btnNext" class="ctrl">다음 ] ▶</button>
+            <button id="btnRestart" class="ctrl">재시작 R</button>
+            <button id="btnLoop" class="ctrl" title="현재 구간 무한 반복 (L)">구간 반복: OFF</button>
+          </div>
+          <div class="btn-group">
+            <button id="btnSpeedSlow" class="ctrl">0.75x</button>
+            <button id="btnSpeedNorm" class="ctrl active">1.0x (원작)</button>
+            <button id="btnSpeedFast" class="ctrl">1.25x</button>
+            <button id="btnPlayerHitbox" class="ctrl active" title="플레이어블 캐릭터 실제 피격 히트박스 표시 (B)">히트박스(B): ON</button>
+            <button id="btnHitbox" class="ctrl" title="추천 이동 경로 가이드 표시 (H)">가이드 표시(H): OFF</button>
+            <button id="btnGodMode" class="ctrl">무적 연습: OFF</button>
+            <select id="maxHitsSelect" class="ctrl" title="사망 피격 횟수 선택 (무적 OFF 시 적용)">
+              <option value="0">사망: 무제한</option>
+              <option value="1" selected>사망: 1대 (원작)</option>
+              <option value="3">사망: 3대</option>
+              <option value="5">사망: 5대</option>
+            </select>
+            <button id="btnAudio" class="ctrl active">사운드: ON</button>
+            <label class="vol-wrap" title="마스터 볼륨">
+              <input id="volSlider" type="range" min="0" max="100" value="85">
+            </label>
+          </div>
+        </div>
+
+        <div class="cue-box">
+          <div id="cueText"><strong>가이드:</strong> 시작 버튼을 누르면 1구간(인트로 &amp; 10시 안전 포켓 파멸 점프)부터 시작합니다.</div>
+          <div id="voiceSub" class="voice-sub"></div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="aside-head">
+          <h3>역사의 끝 — 9구간 타임라인</h3>
+          <p>구간을 클릭하면 해당 구간부터 즉시 연습합니다.</p>
+        </div>
+        <div id="stepList" class="step-list"></div>
+        <div class="key-help">
+          <kbd>↑↓←→</kbd> / <kbd>WASD</kbd> 이동 · <kbd>Shift</kbd> 또는 <kbd>방향키 2연타</kbd> 달리기<br>
+          <kbd>C</kbd> / <kbd>Space</kbd> 점프([파멸] 회피) · <kbd>↓+C</kbd> 백스텝<br>
+          <kbd>X</kbd> 평타 / 54.0초 흑백 카운터 · <kbd>B</kbd> 히트박스 · <kbd>[</kbd> <kbd>]</kbd> 구간 이동 · <kbd>R</kbd> 재시작 · <kbd>L</kbd> 구간 반복
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script defer src="js/audio.js?v=3.9.2"></script>
+  <script defer src="js/data/historyPattern.js?v=3.9.2"></script>
+  <script defer src="js/renderer.js?v=3.9.2"></script>
+  <script defer src="js/engine.js?v=3.9.2"></script>
+</body>
+</html>

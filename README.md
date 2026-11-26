@@ -2,5 +2,5 @@
 
 던전앤파이터 **<각인된 악몽>** 2페이즈 보스 **'죽음을 딛고 선 자 (유리지에)'**의 핵심 패턴인 **「역사의 끝 (역사 칼날 패턴)」**을 와이드 아레나(`1158×720`) 카메라 스크롤, 세계 전환 칼날 판정, 모션별 동적 캐릭터 히트박스와 함께 연습할 수 있는 웹 시뮬레이터입니다.
 
-- **실행 주소 (GitHub Pages)**: https://play-01.github.io/yurisie-history/
+- **실행 주소 (GitHub Pages)**: https://play-01.github.io/yurisie_history/
 - **상세 인수인계 및 기술 문서**: [HANDOVER.md](./HANDOVER.md)

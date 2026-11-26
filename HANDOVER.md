@@ -2,8 +2,8 @@
 
 - **최종 업데이트**: 2026-11-26
 - **현재 캐시 버스팅 버전**: `?v=3.9.1`
-- **GitHub 저장소**: `https://github.com/play-01/yurisie-history` (Public, `main` 브랜치)
-- **실행 URL (GitHub Pages)**: `https://play-01.github.io/yurisie-history/`
+- **GitHub 저장소**: `https://github.com/play-01/yurisie_history` (Public, `main` 브랜치)
+- **실행 URL (GitHub Pages)**: `https://play-01.github.io/yurisie_history/`
 
 ---
 

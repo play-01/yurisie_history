@@ -204,9 +204,9 @@ const HISTORY_STAGES = [
       { t: 3.35, motion: 'spreadClaws', burst: true }
     ],
     bossPos: [579, 228],
-    startPos: [368, 465],
+    startPos: [435, 480],
     guideWaypoints: [
-      [368, 465],
+      [435, 480],
       [605, 465],
       [545, 465],
       [725, 455]
@@ -556,8 +556,9 @@ const HISTORY_STAGES = [
       { t: 5.08, motion: 'spreadClaws', burst: true }
     ],
     bossPos: [579, 228],
-    startPos: [1185, 330],
+    startPos: [1025, 470],
     guideWaypoints: [
+      [1025, 470],
       [1025, 545],
       [-172, 622],
       [140, 630],
